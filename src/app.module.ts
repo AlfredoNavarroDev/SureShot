@@ -6,6 +6,8 @@ import { EventEmitterModule } from '@nestjs/event-emitter';
 import { PrismaModule } from './prisma/prisma.module';
 import { AppController } from './app.controller';
 import { envValidationSchema } from './config/env.validation';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -13,7 +15,8 @@ import { envValidationSchema } from './config/env.validation';
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 100 }]),
     EventEmitterModule.forRoot(),
     PrismaModule,
-    // Feature modules added per sprint
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
