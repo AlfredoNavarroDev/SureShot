@@ -1,8 +1,8 @@
-# Nestjs specific
-/dist
-/node_modules
-/build
-/tmp
+# NestJS
+dist
+node_modules
+build
+tmp
 
 # Logs
 logs
@@ -13,14 +13,14 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# dotenv environment variable files
+# dotenv
 .env
 .env.development
 .env.test
 .env.production
 
-# temp directory
+# temp
 .temp
 .tmp
 
-/generated/prisma
+generated/prisma
