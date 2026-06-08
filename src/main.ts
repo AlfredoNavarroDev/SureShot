@@ -23,13 +23,15 @@ async function bootstrap() {
     credentials: true,
   });
 
-  const swaggerConfig = new DocumentBuilder()
-    .setTitle('SureShot API')
-    .setDescription('World Cup prediction app REST API')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
-  SwaggerModule.setup('api/docs', app, SwaggerModule.createDocument(app, swaggerConfig));
+  if (process.env.NODE_ENV !== 'production') {
+    const swaggerConfig = new DocumentBuilder()
+      .setTitle('SureShot API')
+      .setDescription('World Cup prediction app REST API')
+      .setVersion('1.0')
+      .addBearerAuth()
+      .build();
+    SwaggerModule.setup('api/docs', app, SwaggerModule.createDocument(app, swaggerConfig));
+  }
 
   await app.listen(process.env.PORT ?? 3000);
 }
