@@ -9,6 +9,7 @@ import { envValidationSchema } from './config/env.validation';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RoomsModule } from './rooms/rooms.module';
+import { MatchesModule } from './matches/matches.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { RoomsModule } from './rooms/rooms.module';
     AuthModule,
     UsersModule,
     RoomsModule,
+    MatchesModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
