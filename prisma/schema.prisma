@@ -31,7 +31,7 @@ model User {
   name         String
   avatar       String?
   password     String?
-  googleId     String?
+  googleId     String?  @unique
   role         Role     @default(USER)
   refreshToken String?
   createdAt    DateTime @default(now())
@@ -64,6 +64,7 @@ model RoomMember {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([roomId, userId])
+  @@index([userId])
 }
 
 model Match {
@@ -95,4 +96,6 @@ model Prediction {
   room  Room  @relation(fields: [roomId], references: [id], onDelete: Cascade)
 
   @@unique([userId, matchId, roomId])
+  @@index([matchId])
+  @@index([roomId])
 }
