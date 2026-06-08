@@ -11,6 +11,8 @@ import { UsersModule } from './users/users.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { MatchesModule } from './matches/matches.module';
 import { PredictionsModule } from './predictions/predictions.module';
+import { ScoringModule } from './scoring/scoring.module';
+import { LeaderboardModule } from './leaderboard/leaderboard.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { PredictionsModule } from './predictions/predictions.module';
     RoomsModule,
     MatchesModule,
     PredictionsModule,
+    ScoringModule,
+    LeaderboardModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
