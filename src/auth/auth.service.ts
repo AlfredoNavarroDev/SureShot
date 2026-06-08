@@ -21,7 +21,9 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterDto, res: Response) {
-    const existing = await this.prisma.user.findUnique({ where: { email: dto.email } });
+    const existing = await this.prisma.user.findUnique({
+      where: { email: dto.email },
+    });
     if (existing) throw new ConflictException('Email already registered');
 
     const hashedPassword = await bcrypt.hash(dto.password, 12);
@@ -33,8 +35,11 @@ export class AuthService {
   }
 
   async login(dto: LoginDto, res: Response) {
-    const user = await this.prisma.user.findUnique({ where: { email: dto.email } });
-    if (!user || !user.password) throw new UnauthorizedException('Invalid credentials');
+    const user = await this.prisma.user.findUnique({
+      where: { email: dto.email },
+    });
+    if (!user || !user.password)
+      throw new UnauthorizedException('Invalid credentials');
 
     const valid = await bcrypt.compare(dto.password, user.password);
     if (!valid) throw new UnauthorizedException('Invalid credentials');
@@ -43,13 +48,22 @@ export class AuthService {
   }
 
   async googleLogin(
-    googleUser: { googleId: string; email: string; name: string; avatar?: string },
+    googleUser: {
+      googleId: string;
+      email: string;
+      name: string;
+      avatar?: string;
+    },
     res: Response,
   ) {
-    let user = await this.prisma.user.findFirst({ where: { googleId: googleUser.googleId } });
+    let user = await this.prisma.user.findFirst({
+      where: { googleId: googleUser.googleId },
+    });
 
     if (!user) {
-      const existing = await this.prisma.user.findUnique({ where: { email: googleUser.email } });
+      const existing = await this.prisma.user.findUnique({
+        where: { email: googleUser.email },
+      });
       if (existing) {
         user = await this.prisma.user.update({
           where: { id: existing.id },
@@ -75,7 +89,9 @@ export class AuthService {
       throw new UnauthorizedException('Invalid refresh token');
     }
 
-    const user = await this.prisma.user.findUnique({ where: { id: payload.sub } });
+    const user = await this.prisma.user.findUnique({
+      where: { id: payload.sub },
+    });
     if (!user?.refreshToken) throw new UnauthorizedException('Session expired');
 
     const valid = await bcrypt.compare(refreshToken, user.refreshToken);
@@ -85,7 +101,10 @@ export class AuthService {
   }
 
   async logout(userId: string, res: Response) {
-    await this.prisma.user.update({ where: { id: userId }, data: { refreshToken: null } });
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { refreshToken: null },
+    });
     res.clearCookie('refresh_token');
   }
 

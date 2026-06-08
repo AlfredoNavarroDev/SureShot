@@ -8,7 +8,10 @@ import { MatchResultEvent } from './events/match-result.event';
 
 @Injectable()
 export class MatchesService {
-  constructor(private prisma: PrismaService, private eventEmitter: EventEmitter2) {}
+  constructor(
+    private prisma: PrismaService,
+    private eventEmitter: EventEmitter2,
+  ) {}
 
   async create(dto: CreateMatchDto) {
     return this.prisma.match.create({ data: { ...dto } });
@@ -34,7 +37,10 @@ export class MatchesService {
     const match = await this.prisma.match.findUnique({ where: { id } });
     if (!match) throw new NotFoundException('Match not found');
 
-    const updated = await this.prisma.match.update({ where: { id }, data: dto });
+    const updated = await this.prisma.match.update({
+      where: { id },
+      data: dto,
+    });
 
     if (
       dto.status === MatchStatus.FINISHED &&

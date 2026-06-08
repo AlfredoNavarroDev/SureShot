@@ -47,21 +47,38 @@ describe('MatchesService', () => {
   describe('update', () => {
     it('throws NotFoundException when match not found', async () => {
       prisma.match.findUnique.mockResolvedValue(null);
-      await expect(service.update('bad-id', {})).rejects.toThrow(NotFoundException);
+      await expect(service.update('bad-id', {})).rejects.toThrow(
+        NotFoundException,
+      );
     });
 
     it('emits match.finished event when status set to FINISHED with scores', async () => {
       prisma.match.findUnique.mockResolvedValue(mockMatch);
-      prisma.match.update.mockResolvedValue({ ...mockMatch, homeScore: 2, awayScore: 1, status: MatchStatus.FINISHED });
+      prisma.match.update.mockResolvedValue({
+        ...mockMatch,
+        homeScore: 2,
+        awayScore: 1,
+        status: MatchStatus.FINISHED,
+      });
 
-      await service.update('match-1', { status: MatchStatus.FINISHED, homeScore: 2, awayScore: 1 });
+      await service.update('match-1', {
+        status: MatchStatus.FINISHED,
+        homeScore: 2,
+        awayScore: 1,
+      });
 
-      expect(eventEmitter.emit).toHaveBeenCalledWith('match.finished', expect.objectContaining({ matchId: 'match-1' }));
+      expect(eventEmitter.emit).toHaveBeenCalledWith(
+        'match.finished',
+        expect.objectContaining({ matchId: 'match-1' }),
+      );
     });
 
     it('does NOT emit event when status is not FINISHED', async () => {
       prisma.match.findUnique.mockResolvedValue(mockMatch);
-      prisma.match.update.mockResolvedValue({ ...mockMatch, status: MatchStatus.IN_PROGRESS });
+      prisma.match.update.mockResolvedValue({
+        ...mockMatch,
+        status: MatchStatus.IN_PROGRESS,
+      });
 
       await service.update('match-1', { status: MatchStatus.IN_PROGRESS });
       expect(eventEmitter.emit).not.toHaveBeenCalled();

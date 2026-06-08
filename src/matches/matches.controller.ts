@@ -1,4 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpCode,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { MatchStatus, MatchStage, Role } from '@prisma/client';
 import { MatchesService } from './matches.service';
@@ -16,7 +26,10 @@ export class MatchesController {
   @Get()
   @ApiQuery({ name: 'status', enum: MatchStatus, required: false })
   @ApiQuery({ name: 'stage', enum: MatchStage, required: false })
-  findAll(@Query('status') status?: MatchStatus, @Query('stage') stage?: string) {
+  findAll(
+    @Query('status') status?: MatchStatus,
+    @Query('stage') stage?: string,
+  ) {
     return this.matchesService.findAll(status, stage);
   }
 

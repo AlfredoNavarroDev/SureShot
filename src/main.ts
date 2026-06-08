@@ -14,7 +14,11 @@ async function bootstrap() {
   app.enableShutdownHooks();
 
   app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true, transform: true, forbidNonWhitelisted: true }),
+    new ValidationPipe({
+      whitelist: true,
+      transform: true,
+      forbidNonWhitelisted: true,
+    }),
   );
   app.useGlobalFilters(new AllExceptionsFilter());
 
@@ -30,7 +34,11 @@ async function bootstrap() {
       .setVersion('1.0')
       .addBearerAuth()
       .build();
-    SwaggerModule.setup('api/docs', app, SwaggerModule.createDocument(app, swaggerConfig));
+    SwaggerModule.setup(
+      'api/docs',
+      app,
+      SwaggerModule.createDocument(app, swaggerConfig),
+    );
   }
 
   await app.listen(process.env.PORT ?? 3000);

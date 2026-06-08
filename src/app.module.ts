@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { UserThrottlerGuard } from './common/guards/user-throttler.guard';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { PrismaModule } from './prisma/prisma.module';
 import { AppController } from './app.controller';
@@ -16,8 +17,11 @@ import { LeaderboardModule } from './leaderboard/leaderboard.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, validationSchema: envValidationSchema }),
-    ThrottlerModule.forRoot([{ ttl: 60000, limit: 100 }]),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      validationSchema: envValidationSchema,
+    }),
+    ThrottlerModule.forRoot([{ ttl: 60000, limit: 300 }]),
     EventEmitterModule.forRoot(),
     PrismaModule,
     AuthModule,
@@ -29,6 +33,6 @@ import { LeaderboardModule } from './leaderboard/leaderboard.module';
     LeaderboardModule,
   ],
   controllers: [AppController],
-  providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
+  providers: [{ provide: APP_GUARD, useClass: UserThrottlerGuard }],
 })
 export class AppModule {}

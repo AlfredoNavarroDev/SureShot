@@ -9,7 +9,10 @@ export class ScoringService {
   ): number {
     if (match.homeScore === null || match.awayScore === null) return 0;
 
-    if (prediction.homeScore === match.homeScore && prediction.awayScore === match.awayScore) {
+    if (
+      prediction.homeScore === match.homeScore &&
+      prediction.awayScore === match.awayScore
+    ) {
       return 5;
     }
 

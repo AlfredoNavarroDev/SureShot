@@ -52,7 +52,9 @@ describe('AuthService', () => {
         { provide: JwtService, useValue: jwt },
         {
           provide: ConfigService,
-          useValue: { get: jest.fn().mockReturnValue('test_secret_32_chars_long_xxxxx') },
+          useValue: {
+            get: jest.fn().mockReturnValue('test_secret_32_chars_long_xxxxx'),
+          },
         },
       ],
     }).compile();
@@ -65,7 +67,10 @@ describe('AuthService', () => {
       prisma.user.findUnique.mockResolvedValue(mockUser);
       const res = { cookie: jest.fn() } as any;
       await expect(
-        service.register({ email: 'test@example.com', name: 'Test', password: 'pass1234' }, res),
+        service.register(
+          { email: 'test@example.com', name: 'Test', password: 'pass1234' },
+          res,
+        ),
       ).rejects.toThrow(ConflictException);
     });
 
@@ -75,11 +80,17 @@ describe('AuthService', () => {
       prisma.user.update.mockResolvedValue({ ...mockUser });
       const res = { cookie: jest.fn() } as any;
 
-      await service.register({ email: 'new@example.com', name: 'New', password: 'pass1234' }, res);
+      await service.register(
+        { email: 'new@example.com', name: 'New', password: 'pass1234' },
+        res,
+      );
 
       const createCall = prisma.user.create.mock.calls[0][0];
       expect(createCall.data.password).not.toBe('pass1234');
-      const isHashed = await bcrypt.compare('pass1234', createCall.data.password);
+      const isHashed = await bcrypt.compare(
+        'pass1234',
+        createCall.data.password,
+      );
       expect(isHashed).toBe(true);
     });
 
@@ -102,7 +113,10 @@ describe('AuthService', () => {
       prisma.user.findUnique.mockResolvedValue(null);
       const res = { cookie: jest.fn() } as any;
       await expect(
-        service.login({ email: 'nobody@example.com', password: 'pass1234' }, res),
+        service.login(
+          { email: 'nobody@example.com', password: 'pass1234' },
+          res,
+        ),
       ).rejects.toThrow(UnauthorizedException);
     });
 
@@ -111,7 +125,10 @@ describe('AuthService', () => {
       prisma.user.findUnique.mockResolvedValue({ ...mockUser, password: hash });
       const res = { cookie: jest.fn() } as any;
       await expect(
-        service.login({ email: 'test@example.com', password: 'wrong_pass' }, res),
+        service.login(
+          { email: 'test@example.com', password: 'wrong_pass' },
+          res,
+        ),
       ).rejects.toThrow(UnauthorizedException);
     });
 

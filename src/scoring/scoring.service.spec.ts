@@ -1,15 +1,18 @@
 import { Test } from '@nestjs/testing';
 import { ScoringService } from './scoring.service';
 
-const match = (homeScore: number, awayScore: number) => ({ homeScore, awayScore } as any);
+const match = (homeScore: number, awayScore: number) =>
+  ({ homeScore, awayScore }) as any;
 const pred = (homeScore: number, awayScore: number, isEarlyBonus = false) =>
-  ({ homeScore, awayScore, isEarlyBonus } as any);
+  ({ homeScore, awayScore, isEarlyBonus }) as any;
 
 describe('ScoringService', () => {
   let service: ScoringService;
 
   beforeEach(async () => {
-    const module = await Test.createTestingModule({ providers: [ScoringService] }).compile();
+    const module = await Test.createTestingModule({
+      providers: [ScoringService],
+    }).compile();
     service = module.get(ScoringService);
   });
 
@@ -39,7 +42,12 @@ describe('ScoringService', () => {
     });
 
     it('returns 0 when match scores are null (not finished)', () => {
-      expect(service.computeBasePoints(pred(2, 1), { homeScore: null, awayScore: null } as any)).toBe(0);
+      expect(
+        service.computeBasePoints(pred(2, 1), {
+          homeScore: null,
+          awayScore: null,
+        } as any),
+      ).toBe(0);
     });
 
     it('does NOT add early bonus (early bonus handled separately)', () => {

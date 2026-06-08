@@ -51,7 +51,8 @@ export class RoomsService {
   async remove(id: string, userId: string) {
     const room = await this.prisma.room.findUnique({ where: { id } });
     if (!room) throw new NotFoundException('Room not found');
-    if (room.ownerId !== userId) throw new ForbiddenException('Only the owner can delete this room');
+    if (room.ownerId !== userId)
+      throw new ForbiddenException('Only the owner can delete this room');
     await this.prisma.room.delete({ where: { id } });
   }
 
@@ -74,7 +75,10 @@ export class RoomsService {
     if (room.ownerId !== userId) {
       throw new ForbiddenException('Only the owner can rotate the invite code');
     }
-    return this.prisma.room.update({ where: { id }, data: { inviteCode: nanoid(8) } });
+    return this.prisma.room.update({
+      where: { id },
+      data: { inviteCode: nanoid(8) },
+    });
   }
 
   async getMembers(id: string, userId: string) {
@@ -96,8 +100,10 @@ export class RoomsService {
   async kickMember(roomId: string, targetUserId: string, requesterId: string) {
     const room = await this.prisma.room.findUnique({ where: { id: roomId } });
     if (!room) throw new NotFoundException('Room not found');
-    if (room.ownerId !== requesterId) throw new ForbiddenException('Only the owner can kick members');
-    if (targetUserId === requesterId) throw new ForbiddenException('Cannot kick yourself');
+    if (room.ownerId !== requesterId)
+      throw new ForbiddenException('Only the owner can kick members');
+    if (targetUserId === requesterId)
+      throw new ForbiddenException('Cannot kick yourself');
     await this.prisma.roomMember.delete({
       where: { roomId_userId: { roomId, userId: targetUserId } },
     });

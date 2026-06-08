@@ -1,11 +1,18 @@
-import { Injectable, ForbiddenException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  ForbiddenException,
+  NotFoundException,
+} from '@nestjs/common';
 import { MatchStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 import { ScoringService } from '../scoring/scoring.service';
 
 @Injectable()
 export class LeaderboardService {
-  constructor(private prisma: PrismaService, private scoring: ScoringService) {}
+  constructor(
+    private prisma: PrismaService,
+    private scoring: ScoringService,
+  ) {}
 
   async getLeaderboard(roomId: string, requesterId: string) {
     const room = await this.prisma.room.findUnique({ where: { id: roomId } });
@@ -24,7 +31,11 @@ export class LeaderboardService {
     const rankings = await Promise.all(
       members.map(async (member) => {
         const predictions = await this.prisma.prediction.findMany({
-          where: { userId: member.userId, roomId, match: { status: MatchStatus.FINISHED } },
+          where: {
+            userId: member.userId,
+            roomId,
+            match: { status: MatchStatus.FINISHED },
+          },
           include: { match: true },
           orderBy: { match: { matchDatetime: 'asc' } },
         });

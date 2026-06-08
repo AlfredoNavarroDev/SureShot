@@ -18,7 +18,9 @@ export class PredictionsService {
     });
     if (!membership) throw new ForbiddenException('Not a member of this room');
 
-    const match = await this.prisma.match.findUnique({ where: { id: dto.matchId } });
+    const match = await this.prisma.match.findUnique({
+      where: { id: dto.matchId },
+    });
     if (!match) throw new NotFoundException('Match not found');
     if (match.status === MatchStatus.FINISHED) {
       throw new BadRequestException('Match is already finished');
@@ -26,11 +28,20 @@ export class PredictionsService {
 
     this.assertNotLocked(match.matchDatetime);
 
-    const earlyDeadline = new Date(match.matchDatetime.getTime() - 24 * 60 * 60 * 1000);
+    const earlyDeadline = new Date(
+      match.matchDatetime.getTime() - 24 * 60 * 60 * 1000,
+    );
     const isEarlyBonus = new Date() < earlyDeadline;
 
     return this.prisma.prediction.create({
-      data: { userId, roomId, matchId: dto.matchId, homeScore: dto.homeScore, awayScore: dto.awayScore, isEarlyBonus },
+      data: {
+        userId,
+        roomId,
+        matchId: dto.matchId,
+        homeScore: dto.homeScore,
+        awayScore: dto.awayScore,
+        isEarlyBonus,
+      },
     });
   }
 
@@ -55,14 +66,24 @@ export class PredictionsService {
     return prediction;
   }
 
-  async update(userId: string, roomId: string, matchId: string, dto: Partial<CreatePredictionDto>) {
-    const match = await this.prisma.match.findUnique({ where: { id: matchId } });
+  async update(
+    userId: string,
+    roomId: string,
+    matchId: string,
+    dto: Partial<CreatePredictionDto>,
+  ) {
+    const match = await this.prisma.match.findUnique({
+      where: { id: matchId },
+    });
     if (!match) throw new NotFoundException('Match not found');
-    if (match.status === MatchStatus.FINISHED) throw new BadRequestException('Match is already finished');
+    if (match.status === MatchStatus.FINISHED)
+      throw new BadRequestException('Match is already finished');
 
     this.assertNotLocked(match.matchDatetime);
 
-    const earlyDeadline = new Date(match.matchDatetime.getTime() - 24 * 60 * 60 * 1000);
+    const earlyDeadline = new Date(
+      match.matchDatetime.getTime() - 24 * 60 * 60 * 1000,
+    );
     const isEarlyBonus = new Date() < earlyDeadline;
 
     const existing = await this.prisma.prediction.findUnique({
@@ -72,7 +93,11 @@ export class PredictionsService {
 
     return this.prisma.prediction.update({
       where: { userId_matchId_roomId: { userId, matchId, roomId } },
-      data: { homeScore: dto.homeScore, awayScore: dto.awayScore, isEarlyBonus },
+      data: {
+        homeScore: dto.homeScore,
+        awayScore: dto.awayScore,
+        isEarlyBonus,
+      },
     });
   }
 
