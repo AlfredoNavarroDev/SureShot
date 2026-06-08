@@ -35,7 +35,7 @@ World Cup prediction app. Users join private rooms, predict match scores, earn p
 ```prisma
 enum Role         { USER ADMIN }
 enum MatchStatus  { SCHEDULED IN_PROGRESS FINISHED }
-enum MatchStage   { GROUP R16 QF SF F }
+enum MatchStage   { GROUP ROUND_OF_16 QUARTER_FINAL SEMI_FINAL FINAL }
 
 model User {
   id            String   @id @default(uuid())
