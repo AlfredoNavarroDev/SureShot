@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { RoomsModule } from './rooms/rooms.module';
 import { MatchesModule } from './matches/matches.module';
+import { PredictionsModule } from './predictions/predictions.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { MatchesModule } from './matches/matches.module';
     UsersModule,
     RoomsModule,
     MatchesModule,
+    PredictionsModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
