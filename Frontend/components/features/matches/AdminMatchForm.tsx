@@ -35,8 +35,8 @@ const schema = z.object({
   stage: z.enum(['GROUP', 'ROUND_OF_16', 'QUARTER_FINAL', 'SEMI_FINAL', 'FINAL']),
   group: z.string().optional(),
   status: z.enum(['SCHEDULED', 'IN_PROGRESS', 'FINISHED']).optional(),
-  homeScore: z.coerce.number().int().min(0).optional().nullable(),
-  awayScore: z.coerce.number().int().min(0).optional().nullable(),
+  homeScore: z.number().int().min(0).optional().nullable(),
+  awayScore: z.number().int().min(0).optional().nullable(),
 })
 export type MatchFormData = z.infer<typeof schema>
 
@@ -127,11 +127,11 @@ export function AdminMatchForm({ defaultValues, onSubmit, isPending, isEdit }: P
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-1">
               <Label>Goles local</Label>
-              <Input type="number" min={0} {...register('homeScore')} />
+              <Input type="number" min={0} {...register('homeScore', { valueAsNumber: true })} />
             </div>
             <div className="space-y-1">
               <Label>Goles visitante</Label>
-              <Input type="number" min={0} {...register('awayScore')} />
+              <Input type="number" min={0} {...register('awayScore', { valueAsNumber: true })} />
             </div>
           </div>
         </>

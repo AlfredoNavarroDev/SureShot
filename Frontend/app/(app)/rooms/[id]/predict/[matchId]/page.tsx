@@ -15,8 +15,8 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { ArrowLeft, Zap } from 'lucide-react'
 
 const schema = z.object({
-  homeScore: z.coerce.number().int().min(0, 'Mínimo 0'),
-  awayScore: z.coerce.number().int().min(0, 'Mínimo 0'),
+  homeScore: z.number().int().min(0, 'Mínimo 0'),
+  awayScore: z.number().int().min(0, 'Mínimo 0'),
 })
 type FormData = z.infer<typeof schema>
 
@@ -111,7 +111,7 @@ export default function PredictPage() {
                   min={0}
                   disabled={isLocked}
                   className="h-16 w-16 text-center text-3xl font-black"
-                  {...register('homeScore')}
+                  {...register('homeScore', { valueAsNumber: true })}
                 />
                 {errors.homeScore && (
                   <p className="text-xs text-destructive">{errors.homeScore.message}</p>
@@ -125,7 +125,7 @@ export default function PredictPage() {
                   min={0}
                   disabled={isLocked}
                   className="h-16 w-16 text-center text-3xl font-black"
-                  {...register('awayScore')}
+                  {...register('awayScore', { valueAsNumber: true })}
                 />
                 {errors.awayScore && (
                   <p className="text-xs text-destructive">{errors.awayScore.message}</p>
