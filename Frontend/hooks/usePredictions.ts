@@ -1,9 +1,25 @@
+import { useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import api from '@/lib/api'
+import { getSocket } from '@/lib/socket'
 import type { Prediction } from '@/types/api'
 
 export function usePredictions(roomId: string) {
+  const qc = useQueryClient()
+
+  useEffect(() => {
+    if (!roomId) return
+    const socket = getSocket()
+    const handler = (payload: { roomId: string }) => {
+      if (payload.roomId === roomId) {
+        qc.invalidateQueries({ queryKey: ['rooms', roomId, 'predictions'] })
+      }
+    }
+    socket.on('prediction:saved', handler)
+    return () => { socket.off('prediction:saved', handler) }
+  }, [qc, roomId])
+
   return useQuery({
     queryKey: ['rooms', roomId, 'predictions'],
     queryFn: async () => {

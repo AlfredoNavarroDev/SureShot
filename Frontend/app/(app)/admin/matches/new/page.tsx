@@ -15,7 +15,7 @@ export default function NewMatchPage() {
       awayTeam: data.awayTeam,
       matchDatetime: new Date(data.matchDatetime).toISOString(),
       stage: data.stage,
-      group: data.group,
+      group: data.group ?? undefined,
     })
     router.push('/admin/matches')
   }

@@ -1,7 +1,8 @@
 'use client'
+import { useEffect } from 'react'
 import { useAuthStore } from '@/lib/auth-store'
 import { useRooms } from '@/hooks/useRooms'
-import { useQueries } from '@tanstack/react-query'
+import { useQueries, useQueryClient } from '@tanstack/react-query'
 import { CreateRoomDialog } from '@/components/features/rooms/CreateRoomDialog'
 import { JoinRoomDialog } from '@/components/features/rooms/JoinRoomDialog'
 import { Card, CardContent } from '@/components/ui/card'
@@ -9,16 +10,18 @@ import { Skeleton } from '@/components/ui/skeleton'
 import Link from 'next/link'
 import { Flame, Target, Trophy } from 'lucide-react'
 import api from '@/lib/api'
+import { getSocket } from '@/lib/socket'
 import type { LeaderboardEntry } from '@/types/api'
 import { cn } from '@/lib/utils'
 
 export default function HomePage() {
   const user = useAuthStore((s) => s.user)
+  const qc = useQueryClient()
   const { data: rooms = [], isLoading: roomsLoading } = useRooms()
 
   const leaderboardQueries = useQueries({
     queries: rooms.map((room) => ({
-      queryKey: ['rooms', room.id, 'leaderboard'],
+      queryKey: ['rooms', room.id, 'leaderboard', 'home'],
       queryFn: async () => {
         const { data } = await api.get<LeaderboardEntry[]>(
           `/rooms/${room.id}/leaderboard`
@@ -28,6 +31,15 @@ export default function HomePage() {
       staleTime: 30_000,
     })),
   })
+
+  useEffect(() => {
+    const socket = getSocket()
+    const handler = () => {
+      qc.invalidateQueries({ queryKey: ['rooms'] })
+    }
+    socket.on('leaderboard:updated', handler)
+    return () => { socket.off('leaderboard:updated', handler) }
+  }, [qc])
 
   const globalStats = leaderboardQueries.reduce(
     (acc, q) => {

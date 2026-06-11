@@ -12,6 +12,8 @@ import { useAuthStore } from '@/lib/auth-store'
 import api from '@/lib/api'
 import type { AuthResponse } from '@/types/api'
 import Link from 'next/link'
+import { buttonVariants } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 export function RegisterForm() {
   const { setAuth } = useAuthStore()
@@ -68,6 +70,20 @@ export function RegisterForm() {
             {isSubmitting ? 'Cargando...' : 'Crear cuenta'}
           </Button>
         </form>
+        <div className="relative my-4">
+          <div className="absolute inset-0 flex items-center">
+            <span className="w-full border-t" />
+          </div>
+          <div className="relative flex justify-center text-xs uppercase">
+            <span className="bg-card px-2 text-muted-foreground">o</span>
+          </div>
+        </div>
+        <a
+          href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}
+          className={cn(buttonVariants({ variant: 'outline' }), 'w-full')}
+        >
+          Continuar con Google
+        </a>
       </CardContent>
       <CardFooter className="justify-center text-sm text-muted-foreground">
         ¿Ya tienes cuenta?&nbsp;

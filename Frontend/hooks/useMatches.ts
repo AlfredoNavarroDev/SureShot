@@ -1,11 +1,22 @@
+import { useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import api from '@/lib/api'
+import { getSocket } from '@/lib/socket'
 import type { Match, MatchStatus, MatchStage } from '@/types/api'
 
 interface MatchFilters { status?: MatchStatus; stage?: MatchStage }
 
 export function useMatches(filters: MatchFilters = {}) {
+  const qc = useQueryClient()
+
+  useEffect(() => {
+    const socket = getSocket()
+    const handler = () => qc.invalidateQueries({ queryKey: ['matches'] })
+    socket.on('match:updated', handler)
+    return () => { socket.off('match:updated', handler) }
+  }, [qc])
+
   return useQuery({
     queryKey: ['matches', filters],
     queryFn: async () => {
@@ -17,6 +28,19 @@ export function useMatches(filters: MatchFilters = {}) {
 }
 
 export function useMatch(id: string) {
+  const qc = useQueryClient()
+
+  useEffect(() => {
+    const socket = getSocket()
+    const handler = (payload: { matchId: string }) => {
+      if (payload.matchId === id) {
+        qc.invalidateQueries({ queryKey: ['matches', id] })
+      }
+    }
+    socket.on('match:updated', handler)
+    return () => { socket.off('match:updated', handler) }
+  }, [qc, id])
+
   return useQuery({
     queryKey: ['matches', id],
     queryFn: async () => {

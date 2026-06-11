@@ -33,7 +33,7 @@ const schema = z.object({
   awayTeam: z.string().min(1, 'Requerido'),
   matchDatetime: z.string().min(1, 'Requerido'),
   stage: z.enum(['GROUP', 'ROUND_OF_16', 'QUARTER_FINAL', 'SEMI_FINAL', 'FINAL']),
-  group: z.string().optional(),
+  group: z.string().nullish(),
   status: z.enum(['SCHEDULED', 'IN_PROGRESS', 'FINISHED']).optional(),
   homeScore: z.number().int().min(0).optional().nullable(),
   awayScore: z.number().int().min(0).optional().nullable(),

@@ -1,12 +1,13 @@
 'use client'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { useAuthStore } from '@/lib/auth-store'
+import api from '@/lib/api'
 import {
   Home, Calendar, User, Moon, Sun, Shield,
-  ChevronRight, ChevronLeft, Trophy,
+  ChevronRight, ChevronLeft, Trophy, LogOut,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -24,8 +25,16 @@ export function Sidebar() {
   const [expanded, setExpanded] = useState(false)
   const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+  const router = useRouter()
   const { theme, setTheme } = useTheme()
   const user = useAuthStore((s) => s.user)
+  const clear = useAuthStore((s) => s.clear)
+
+  const handleLogout = async () => {
+    try { await api.delete('/auth/logout') } catch {}
+    clear()
+    router.push('/login')
+  }
 
   useEffect(() => {
     setMounted(true)
@@ -105,6 +114,16 @@ export function Sidebar() {
             )}
           </button>
         )}
+        <button
+          onClick={handleLogout}
+          className={cn(
+            'flex items-center gap-3 rounded-lg px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive',
+            !expanded && 'justify-center'
+          )}
+        >
+          <LogOut className="h-5 w-5 shrink-0" />
+          {expanded && <span>Cerrar sesión</span>}
+        </button>
         <button
           onClick={() => setExpanded((e) => !e)}
           className={cn(
