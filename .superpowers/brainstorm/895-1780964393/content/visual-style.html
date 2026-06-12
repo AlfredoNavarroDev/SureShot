@@ -1,0 +1,96 @@
+<h2>¿Qué estilo visual tiene SureShot?</h2>
+<p class="subtitle">Elige la dirección de diseño para toda la app</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="dark-glass" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f1117;padding:16px;border-radius:8px;min-height:180px">
+      <div style="background:rgba(255,255,255,0.07);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:14px;margin-bottom:10px">
+        <div style="color:#a3e635;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">🏆 LEADERBOARD</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#a3e635,#65a30d);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0f1117">1</div>
+          <div style="color:#f1f5f9;font-size:13px;font-weight:600">Luis Merca</div>
+          <div style="margin-left:auto;color:#a3e635;font-weight:700;font-size:14px">142 pts</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:11px;color:#94a3b8">2</div>
+          <div style="color:#94a3b8;font-size:13px">Fabrizzio</div>
+          <div style="margin-left:auto;color:#94a3b8;font-weight:600;font-size:14px">118 pts</div>
+        </div>
+      </div>
+      <div style="background:rgba(163,230,53,0.08);border:1px solid rgba(163,230,53,0.2);border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center">
+        <div style="color:#cbd5e1;font-size:12px">Argentina vs Francia</div>
+        <div style="display:flex;gap:6px">
+          <input style="width:32px;height:32px;background:rgba(255,255,255,0.05);border:1px solid rgba(163,230,53,0.4);border-radius:6px;text-align:center;color:#f1f5f9;font-weight:700;font-size:14px" value="2" readonly>
+          <span style="color:#64748b;line-height:32px">-</span>
+          <input style="width:32px;height:32px;background:rgba(255,255,255,0.05);border:1px solid rgba(163,230,53,0.4);border-radius:6px;text-align:center;color:#f1f5f9;font-weight:700;font-size:14px" value="1" readonly>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Dark + Glassmorphism</h3>
+      <p>Fondo oscuro, cards con blur, acento verde lima. Feel moderno, tipo app de deportes/gaming. Energético y premium.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="light-clean" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#f8fafc;padding:16px;border-radius:8px;min-height:180px">
+      <div style="background:white;border:1px solid #e2e8f0;border-radius:12px;padding:14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,0.06)">
+        <div style="color:#0ea5e9;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">🏆 LEADERBOARD</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="width:28px;height:28px;border-radius:50%;background:#0ea5e9;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:white">1</div>
+          <div style="color:#0f172a;font-size:13px;font-weight:600">Luis Merca</div>
+          <div style="margin-left:auto;color:#0ea5e9;font-weight:700;font-size:14px">142 pts</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:28px;height:28px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;font-size:11px;color:#64748b">2</div>
+          <div style="color:#64748b;font-size:13px">Fabrizzio</div>
+          <div style="margin-left:auto;color:#64748b;font-weight:600;font-size:14px">118 pts</div>
+        </div>
+      </div>
+      <div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center">
+        <div style="color:#0f172a;font-size:12px;font-weight:500">Argentina vs Francia</div>
+        <div style="display:flex;gap:6px">
+          <input style="width:32px;height:32px;background:white;border:1px solid #cbd5e1;border-radius:6px;text-align:center;color:#0f172a;font-weight:700;font-size:14px" value="2" readonly>
+          <span style="color:#94a3b8;line-height:32px">-</span>
+          <input style="width:32px;height:32px;background:white;border:1px solid #cbd5e1;border-radius:6px;text-align:center;color:#0f172a;font-weight:700;font-size:14px" value="1" readonly>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Light + Clean</h3>
+      <p>Fondo claro, tipografía clara, acento azul cielo. Profesional y legible. Fácil de leer en cualquier luz.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="bold-dark" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#18181b;padding:16px;border-radius:8px;min-height:180px">
+      <div style="background:#27272a;border-radius:12px;padding:14px;margin-bottom:10px;border-left:3px solid #f97316">
+        <div style="color:#f97316;font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px">🏆 LEADERBOARD</div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="width:28px;height:28px;border-radius:4px;background:#f97316;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:white">1</div>
+          <div style="color:#fafafa;font-size:13px;font-weight:700">Luis Merca</div>
+          <div style="margin-left:auto;color:#f97316;font-weight:800;font-size:14px">142 pts</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px">
+          <div style="width:28px;height:28px;border-radius:4px;background:#3f3f46;display:flex;align-items:center;justify-content:center;font-size:11px;color:#a1a1aa">2</div>
+          <div style="color:#a1a1aa;font-size:13px">Fabrizzio</div>
+          <div style="margin-left:auto;color:#a1a1aa;font-weight:600;font-size:14px">118 pts</div>
+        </div>
+      </div>
+      <div style="background:#27272a;border-radius:10px;padding:10px;display:flex;justify-content:space-between;align-items:center;border-left:3px solid #f97316">
+        <div style="color:#fafafa;font-size:12px;font-weight:600">Argentina vs Francia</div>
+        <div style="display:flex;gap:6px">
+          <input style="width:32px;height:32px;background:#3f3f46;border:none;border-radius:4px;text-align:center;color:#fafafa;font-weight:800;font-size:14px" value="2" readonly>
+          <span style="color:#52525b;line-height:32px">-</span>
+          <input style="width:32px;height:32px;background:#3f3f46;border:none;border-radius:4px;text-align:center;color:#fafafa;font-weight:800;font-size:14px" value="1" readonly>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Bold Dark</h3>
+      <p>Dark zinc puro, sin glass, acento naranja fuego. Más sólido y rápido de construir. Fuerte contraste, muy legible.</p>
+    </div>
+  </div>
+
+</div>

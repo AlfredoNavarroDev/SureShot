@@ -5,12 +5,16 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { MatchStatus } from '@prisma/client';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePredictionDto } from './dto/create-prediction.dto';
 
 @Injectable()
 export class PredictionsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private eventEmitter: EventEmitter2,
+  ) {}
 
   async create(userId: string, roomId: string, dto: CreatePredictionDto) {
     const membership = await this.prisma.roomMember.findUnique({
@@ -33,7 +37,7 @@ export class PredictionsService {
     );
     const isEarlyBonus = new Date() < earlyDeadline;
 
-    return this.prisma.prediction.create({
+    const prediction = await this.prisma.prediction.create({
       data: {
         userId,
         roomId,
@@ -43,6 +47,10 @@ export class PredictionsService {
         isEarlyBonus,
       },
     });
+
+    this.eventEmitter.emit('prediction.saved', { roomId });
+
+    return prediction;
   }
 
   async findAllInRoom(userId: string, roomId: string) {
@@ -91,7 +99,7 @@ export class PredictionsService {
     });
     if (!existing) throw new NotFoundException('Prediction not found');
 
-    return this.prisma.prediction.update({
+    const prediction = await this.prisma.prediction.update({
       where: { userId_matchId_roomId: { userId, matchId, roomId } },
       data: {
         homeScore: dto.homeScore,
@@ -99,6 +107,30 @@ export class PredictionsService {
         isEarlyBonus,
       },
     });
+
+    this.eventEmitter.emit('prediction.saved', { roomId });
+
+    return prediction;
+  }
+
+  async remove(userId: string, roomId: string, matchId: string) {
+    const match = await this.prisma.match.findUnique({ where: { id: matchId } });
+    if (!match) throw new NotFoundException('Match not found');
+    if (match.status === MatchStatus.FINISHED)
+      throw new BadRequestException('Match is already finished');
+
+    this.assertNotLocked(match.matchDatetime);
+
+    const existing = await this.prisma.prediction.findUnique({
+      where: { userId_matchId_roomId: { userId, matchId, roomId } },
+    });
+    if (!existing) throw new NotFoundException('Prediction not found');
+
+    await this.prisma.prediction.delete({
+      where: { userId_matchId_roomId: { userId, matchId, roomId } },
+    });
+
+    this.eventEmitter.emit('prediction.saved', { roomId });
   }
 
   private assertNotLocked(matchDatetime: Date) {

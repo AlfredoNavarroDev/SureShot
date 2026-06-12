@@ -43,6 +43,20 @@ const STAGE_FILTERS: Array<{ label: string; value: MatchStage | 'ALL' }> = [
   { label: 'Final', value: 'FINAL' },
 ]
 
+const STATUS_ORDER: Record<MatchStatus, number> = {
+  IN_PROGRESS: 0,
+  FINISHED: 1,
+  SCHEDULED: 2,
+}
+
+const STAGE_ORDER: Record<MatchStage, number> = {
+  FINAL: 0,
+  SEMI_FINAL: 1,
+  QUARTER_FINAL: 2,
+  ROUND_OF_16: 3,
+  GROUP: 4,
+}
+
 export default function MatchesPage() {
   const [statusFilter, setStatusFilter] = useState<MatchStatus | 'ALL'>('ALL')
   const [stageFilter, setStageFilter] = useState<MatchStage | 'ALL'>('ALL')
@@ -94,7 +108,13 @@ export default function MatchesPage() {
       )}
 
       <div className="space-y-2">
-        {matches.map((match) => (
+        {[...matches]
+          .sort((a, b) => {
+            const statusDiff = STATUS_ORDER[a.status] - STATUS_ORDER[b.status]
+            if (statusDiff !== 0) return statusDiff
+            return STAGE_ORDER[a.stage] - STAGE_ORDER[b.stage]
+          })
+          .map((match) => (
           <div
             key={match.id}
             className="flex items-center justify-between rounded-lg border border-border bg-card p-4"

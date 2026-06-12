@@ -1,4 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
+import { SkipThrottle } from '@nestjs/throttler';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { LeaderboardService } from './leaderboard.service';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
@@ -9,6 +10,7 @@ import { CurrentUser } from '../common/decorators/current-user.decorator';
 export class LeaderboardController {
   constructor(private leaderboardService: LeaderboardService) {}
 
+  @SkipThrottle()
   @Get()
   getLeaderboard(@Param('roomId') roomId: string, @CurrentUser() user: any) {
     return this.leaderboardService.getLeaderboard(roomId, user.id);

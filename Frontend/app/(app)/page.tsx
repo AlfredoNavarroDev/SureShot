@@ -105,39 +105,41 @@ export default function HomePage() {
           </p>
         )}
 
-        {rooms.map((room) => {
-          const info = rankByRoom[room.id]
-          const isTop = info?.rank === 1
-          return (
-            <Link key={room.id} href={`/rooms/${room.id}`}>
-              <Card
-                className={cn(
-                  'cursor-pointer transition-colors hover:border-primary/60',
-                  isTop && 'border-primary/50 bg-accent/30'
-                )}
-              >
-                <CardContent className="flex items-center justify-between p-4">
-                  <div>
-                    <p className="font-semibold">{room.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {info
-                        ? `${info.entry.predictionsCount} predicciones`
-                        : 'Sin predicciones aún'}
-                    </p>
-                  </div>
-                  {info && (
-                    <div className="text-right">
-                      <p className="text-lg font-bold text-primary">#{info.rank}</p>
+        <div className="flex flex-col gap-3">
+          {rooms.map((room) => {
+            const info = rankByRoom[room.id]
+            const isTop = info?.rank === 1
+            return (
+              <Link key={room.id} href={`/rooms/${room.id}`}>
+                <Card
+                  className={cn(
+                    'cursor-pointer transition-colors hover:border-primary/60',
+                    isTop && 'border-primary/50'
+                  )}
+                >
+                  <CardContent className="flex items-center justify-between p-4">
+                    <div>
+                      <p className="font-semibold">{room.name}</p>
                       <p className="text-xs text-muted-foreground">
-                        {info.entry.totalPoints} pts
+                        {info
+                          ? `${info.entry.predictionsCount} predicciones`
+                          : 'Sin predicciones aún'}
                       </p>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            </Link>
-          )
-        })}
+                    {info && (
+                      <div className="text-right">
+                        <p className="text-lg font-bold text-primary">#{info.rank}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {info.entry.totalPoints} pts
+                        </p>
+                      </div>
+                    )}
+                  </CardContent>
+                </Card>
+              </Link>
+            )
+          })}
+        </div>
       </div>
 
       <div className="flex gap-3">

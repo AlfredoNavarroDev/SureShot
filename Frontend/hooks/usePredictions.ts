@@ -83,3 +83,16 @@ export function useUpdatePrediction(roomId: string, matchId: string) {
     },
   })
 }
+
+export function useDeletePrediction(roomId: string, matchId: string) {
+  const qc = useQueryClient()
+  return useMutation({
+    mutationFn: () => api.delete(`/rooms/${roomId}/predictions/${matchId}`),
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ['rooms', roomId, 'predictions'] })
+      qc.invalidateQueries({ queryKey: ['rooms', roomId, 'leaderboard'] })
+      toast.success('Predicción eliminada')
+    },
+    onError: () => toast.error('Error al eliminar predicción'),
+  })
+}

@@ -14,6 +14,7 @@ import { MatchesModule } from './matches/matches.module';
 import { PredictionsModule } from './predictions/predictions.module';
 import { ScoringModule } from './scoring/scoring.module';
 import { LeaderboardModule } from './leaderboard/leaderboard.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { LeaderboardModule } from './leaderboard/leaderboard.module';
     PredictionsModule,
     ScoringModule,
     LeaderboardModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_GUARD, useClass: UserThrottlerGuard }],

@@ -1,9 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ExecutionContext } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
-import { ExecutionContext } from '@nestjs/common';
+import { IS_PUBLIC_KEY } from '../decorators/public.decorator';
 
 @Injectable()
 export class UserThrottlerGuard extends ThrottlerGuard {
+  protected async shouldSkip(context: ExecutionContext): Promise<boolean> {
+    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
+      context.getHandler(),
+      context.getClass(),
+    ]);
+    return isPublic ?? false;
+  }
+
   protected async getTracker(req: Record<string, unknown>): Promise<string> {
     const user = req['user'] as { id?: string } | undefined;
     if (user?.id) return user.id;

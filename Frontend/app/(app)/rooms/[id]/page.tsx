@@ -1,4 +1,5 @@
 'use client'
+import { useState } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { useRoom } from '@/hooks/useRoom'
 import { useMatches } from '@/hooks/useMatches'
@@ -16,15 +17,41 @@ import { LeaderboardTable } from '@/components/features/leaderboard/LeaderboardT
 import Link from 'next/link'
 import { Copy, ArrowLeft } from 'lucide-react'
 import { toast } from 'sonner'
-import type { Match } from '@/types/api'
+import { cn } from '@/lib/utils'
+import type { Match, MatchStatus, MatchStage } from '@/types/api'
+
+const STATUS_FILTERS: Array<{ label: string; value: MatchStatus | 'ALL' }> = [
+  { label: 'Todos',       value: 'ALL' },
+  { label: 'Programados', value: 'SCHEDULED' },
+  { label: 'En juego',    value: 'IN_PROGRESS' },
+  { label: 'Finalizados', value: 'FINISHED' },
+]
+
+const STAGE_FILTERS: Array<{ label: string; value: MatchStage | 'ALL' }> = [
+  { label: 'Todas las fases', value: 'ALL' },
+  { label: 'Grupos',          value: 'GROUP' },
+  { label: 'Octavos',         value: 'ROUND_OF_16' },
+  { label: 'Cuartos',         value: 'QUARTER_FINAL' },
+  { label: 'Semis',           value: 'SEMI_FINAL' },
+  { label: 'Final',           value: 'FINAL' },
+]
+
+const STATUS_ORDER: Record<MatchStatus, number> = { IN_PROGRESS: 0, FINISHED: 1, SCHEDULED: 2 }
+const STAGE_ORDER: Record<MatchStage, number>   = { FINAL: 0, SEMI_FINAL: 1, QUARTER_FINAL: 2, ROUND_OF_16: 3, GROUP: 4 }
 
 export default function RoomPage() {
   const { id } = useParams<{ id: string }>()
   const user = useAuthStore((s) => s.user)
   const router = useRouter()
 
+  const [statusFilter, setStatusFilter] = useState<MatchStatus | 'ALL'>('ALL')
+  const [stageFilter,  setStageFilter]  = useState<MatchStage  | 'ALL'>('ALL')
+
   const { data: room, isLoading: roomLoading } = useRoom(id)
-  const { data: matches = [] } = useMatches()
+  const { data: matches = [] } = useMatches({
+    status: statusFilter === 'ALL' ? undefined : statusFilter,
+    stage:  stageFilter  === 'ALL' ? undefined : stageFilter,
+  })
   const { data: predictions = [] } = usePredictions(id)
   const { data: leaderboard = [], isLoading: lbLoading } = useLeaderboard(id)
   const { data: members = [] } = useRoomMembers(id)
@@ -78,11 +105,43 @@ export default function RoomPage() {
           <TabsTrigger value="members" className="flex-1">Miembros</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="predictions" className="mt-4 space-y-2">
+        <TabsContent value="predictions" className="mt-4 space-y-3">
+          <div className="flex flex-wrap gap-2">
+            {STATUS_FILTERS.map((f) => (
+              <Button
+                key={f.value}
+                size="sm"
+                variant={statusFilter === f.value ? 'default' : 'outline'}
+                className={cn(statusFilter === f.value && 'text-black font-bold')}
+                onClick={() => setStatusFilter(f.value)}
+              >
+                {f.label}
+              </Button>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {STAGE_FILTERS.map((f) => (
+              <Button
+                key={f.value}
+                size="sm"
+                variant={stageFilter === f.value ? 'secondary' : 'ghost'}
+                onClick={() => setStageFilter(f.value)}
+              >
+                {f.label}
+              </Button>
+            ))}
+          </div>
+
           {matches.length === 0 && (
-            <p className="text-sm text-muted-foreground">No hay partidos cargados aún.</p>
+            <p className="text-sm text-muted-foreground">No hay partidos con estos filtros.</p>
           )}
-          {matches.map((match: Match) => {
+          {[...matches]
+            .sort((a, b) => {
+              const sd = STATUS_ORDER[a.status] - STATUS_ORDER[b.status]
+              if (sd !== 0) return sd
+              return STAGE_ORDER[a.stage] - STAGE_ORDER[b.stage]
+            })
+            .map((match: Match) => {
             const prediction = predictionMap.get(match.id)
             const isLocked = match.status !== 'SCHEDULED'
             return (

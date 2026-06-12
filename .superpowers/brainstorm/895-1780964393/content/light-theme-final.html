@@ -1,0 +1,173 @@
+<h2>HOME · Light Theme (final)</h2>
+<p class="subtitle">Fiel al mockup — cards blancas, números grandes, botones full-width</p>
+
+<style>
+  .light-home {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    max-width: 680px;
+    margin: 20px auto;
+    min-height: 340px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  /* Sidebar */
+  .l-sidebar {
+    width: 60px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 0;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .l-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #9ca3af;
+  }
+  .l-icon.active { background: #dcfce7; }
+  .l-icon.logo { background: linear-gradient(135deg, #84cc16, #4d7c0f); font-size: 18px; }
+  /* Main content */
+  .l-content { flex: 1; padding: 16px; }
+  /* Stat cards */
+  .l-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .l-stat {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+  }
+  .l-stat-val { font-size: 28px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .l-stat-lbl { color: #9ca3af; font-size: 11px; }
+  /* Section label */
+  .l-section-lbl {
+    color: #9ca3af;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  /* Room cards */
+  .l-room {
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .l-room.highlighted {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+  }
+  .l-room.plain {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+  }
+  .l-room-name { font-size: 14px; font-weight: 700; color: #111827; margin-bottom: 2px; }
+  .l-room-sub { font-size: 11px; color: #9ca3af; }
+  .l-room-rank { font-size: 15px; font-weight: 800; color: #6b7280; text-align: right; }
+  .l-room-pts { font-size: 11px; color: #9ca3af; text-align: right; }
+  /* Buttons */
+  .l-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .l-btn-primary {
+    background: #65a30d;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+  }
+  .l-btn-outline {
+    background: transparent;
+    color: #65a30d;
+    border: 1.5px solid #86efac;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+  }
+</style>
+
+<div class="light-home">
+  <!-- Sidebar -->
+  <div class="l-sidebar">
+    <div class="l-icon logo">⚽</div>
+    <div class="l-icon active">🏠</div>
+    <div class="l-icon">📅</div>
+    <div class="l-icon">👤</div>
+    <div class="l-icon" style="margin-top: auto; background: #f3f4f6; border-radius: 50%;">🌙</div>
+  </div>
+
+  <!-- Content -->
+  <div class="l-content">
+    <!-- Stats -->
+    <div class="l-stats">
+      <div class="l-stat">
+        <div class="l-stat-val" style="color: #65a30d;">142</div>
+        <div class="l-stat-lbl">pts totales</div>
+      </div>
+      <div class="l-stat">
+        <div class="l-stat-val" style="color: #111827;">12</div>
+        <div class="l-stat-lbl">predicciones</div>
+      </div>
+      <div class="l-stat">
+        <div class="l-stat-val" style="color: #d97706;">🔥3</div>
+        <div class="l-stat-lbl">racha</div>
+      </div>
+    </div>
+
+    <!-- Rooms -->
+    <div class="l-section-lbl">Mis Rooms</div>
+
+    <div class="l-room highlighted">
+      <div>
+        <div class="l-room-name">🏆 Amigos 2026</div>
+        <div class="l-room-sub">8 miembros · 3 sin predecir</div>
+      </div>
+      <div>
+        <div class="l-room-rank">#3</div>
+        <div class="l-room-pts">142 pts</div>
+      </div>
+    </div>
+
+    <div class="l-room plain">
+      <div>
+        <div class="l-room-name">💼 Trabajo FC</div>
+        <div class="l-room-sub">12 miembros · 1 sin predecir</div>
+      </div>
+      <div>
+        <div class="l-room-rank">#7</div>
+        <div class="l-room-pts">98 pts</div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="l-buttons">
+      <div class="l-btn-primary">+ Crear room</div>
+      <div class="l-btn-outline">🔑 Unirse con código</div>
+    </div>
+  </div>
+</div>

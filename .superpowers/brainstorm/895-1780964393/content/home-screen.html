@@ -1,0 +1,93 @@
+<h2>¿Qué ve el usuario al entrar a la app?</h2>
+<p class="subtitle">La pantalla principal después del login define el flujo entero</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="rooms-home" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f1117;border-radius:8px;overflow:hidden;min-height:200px;display:flex;flex-direction:column;padding:14px">
+      <div style="color:#a3e635;font-size:9px;font-weight:700;letter-spacing:2px;margin-bottom:10px">MIS ROOMS</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1">
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(163,230,53,0.2);border-radius:10px;padding:10px">
+          <div style="font-size:16px;margin-bottom:4px">🏆</div>
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600">Amigos 2026</div>
+          <div style="color:#a3e635;font-size:10px;margin-top:2px">#3 de 8</div>
+          <div style="color:#64748b;font-size:9px">3 por predecir</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:10px">
+          <div style="font-size:16px;margin-bottom:4px">💼</div>
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600">Trabajo FC</div>
+          <div style="color:#64748b;font-size:10px;margin-top:2px">#7 de 12</div>
+          <div style="color:#64748b;font-size:9px">1 por predecir</div>
+        </div>
+        <div style="background:rgba(163,230,53,0.06);border:2px dashed rgba(163,230,53,0.3);border-radius:10px;padding:10px;display:flex;align-items:center;justify-content:center;grid-column:span 2">
+          <div style="color:#a3e635;font-size:10px;font-weight:600">+ Crear / Unirse a room</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Rooms como home (Recomendado)</h3>
+      <p>El usuario ve sus rooms al entrar. Cada room es un mundo: predicciones + leaderboard propios. Flujo natural: room → predecir → ranking.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="dashboard-home" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f1117;border-radius:8px;overflow:hidden;min-height:200px;display:flex;flex-direction:column;padding:14px">
+      <div style="color:#a3e635;font-size:9px;font-weight:700;letter-spacing:2px;margin-bottom:10px">DASHBOARD</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px">
+        <div style="background:rgba(163,230,53,0.08);border:1px solid rgba(163,230,53,0.2);border-radius:8px;padding:8px;text-align:center">
+          <div style="color:#a3e635;font-size:16px;font-weight:800">142</div>
+          <div style="color:#64748b;font-size:8px">pts totales</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px;text-align:center">
+          <div style="color:#f1f5f9;font-size:16px;font-weight:800">12</div>
+          <div style="color:#64748b;font-size:8px">predicciones</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px;text-align:center">
+          <div style="color:#f1f5f9;font-size:16px;font-weight:800">🔥3</div>
+          <div style="color:#64748b;font-size:8px">racha</div>
+        </div>
+      </div>
+      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:8px;padding:8px">
+        <div style="color:#94a3b8;font-size:9px;margin-bottom:4px">PRÓXIMO PARTIDO</div>
+        <div style="color:#f1f5f9;font-size:11px;font-weight:600">Argentina vs México — hoy 18:00</div>
+        <div style="color:#a3e635;font-size:9px;margin-top:2px">Sin predecir aún ⚡</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Dashboard con stats globales</h3>
+      <p>Home con KPIs del usuario: puntos totales, racha, próximo partido pendiente. Más rico visualmente, más trabajo de implementar.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="matches-home" onclick="toggleSelect(this)">
+    <div class="card-image" style="background:#0f1117;border-radius:8px;overflow:hidden;min-height:200px;display:flex;flex-direction:column;padding:14px">
+      <div style="color:#a3e635;font-size:9px;font-weight:700;letter-spacing:2px;margin-bottom:10px">HOY · GRUPO A</div>
+      <div style="display:flex;flex-direction:column;gap:6px;flex:1">
+        <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(163,230,53,0.3);border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:space-between">
+          <div style="color:#f1f5f9;font-size:11px">Argentina</div>
+          <div style="display:flex;gap:4px;align-items:center">
+            <div style="width:24px;height:24px;background:rgba(163,230,53,0.1);border:1px solid rgba(163,230,53,0.4);border-radius:4px;text-align:center;line-height:24px;color:#a3e635;font-size:12px;font-weight:700">2</div>
+            <div style="color:#475569;font-size:10px">-</div>
+            <div style="width:24px;height:24px;background:rgba(163,230,53,0.1);border:1px solid rgba(163,230,53,0.4);border-radius:4px;text-align:center;line-height:24px;color:#a3e635;font-size:12px;font-weight:700">1</div>
+          </div>
+          <div style="color:#f1f5f9;font-size:11px">México</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:space-between">
+          <div style="color:#94a3b8;font-size:11px">Brasil</div>
+          <div style="color:#64748b;font-size:9px">18:00</div>
+          <div style="color:#94a3b8;font-size:11px">Serbia</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:space-between">
+          <div style="color:#94a3b8;font-size:11px">Francia</div>
+          <div style="color:#64748b;font-size:9px">21:00</div>
+          <div style="color:#94a3b8;font-size:11px">Polonia</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Lista de partidos como home</h3>
+      <p>Home centrado en los partidos del día. Predecir directo desde la lista. Más simple, menos contexto de rooms.</p>
+    </div>
+  </div>
+
+</div>

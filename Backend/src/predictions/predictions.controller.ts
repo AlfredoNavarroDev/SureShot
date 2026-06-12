@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { PredictionsService } from './predictions.service';
 import { CreatePredictionDto } from './dto/create-prediction.dto';
@@ -41,5 +41,15 @@ export class PredictionsController {
     @Body() dto: Partial<CreatePredictionDto>,
   ) {
     return this.predictionsService.update(user.id, roomId, matchId, dto);
+  }
+
+  @Delete(':matchId')
+  @HttpCode(204)
+  remove(
+    @CurrentUser() user: any,
+    @Param('roomId') roomId: string,
+    @Param('matchId') matchId: string,
+  ) {
+    return this.predictionsService.remove(user.id, roomId, matchId);
   }
 }

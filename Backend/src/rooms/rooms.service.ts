@@ -5,12 +5,16 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { nanoid } from 'nanoid';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateRoomDto } from './dto/create-room.dto';
 
 @Injectable()
 export class RoomsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private eventEmitter: EventEmitter2,
+  ) {}
 
   async create(userId: string, dto: CreateRoomDto) {
     return this.prisma.room.create({
@@ -66,6 +70,9 @@ export class RoomsService {
     if (existing) throw new ConflictException('Already a member of this room');
 
     await this.prisma.roomMember.create({ data: { roomId: room.id, userId } });
+
+    this.eventEmitter.emit('room.member.updated', { roomId: room.id });
+
     return room;
   }
 
@@ -107,5 +114,7 @@ export class RoomsService {
     await this.prisma.roomMember.delete({
       where: { roomId_userId: { roomId, userId: targetUserId } },
     });
+
+    this.eventEmitter.emit('room.member.updated', { roomId });
   }
 }

@@ -1,0 +1,283 @@
+<h2>Pantallas principales — SureShot</h2>
+<p class="subtitle">Dark glass · sidebar colapsable · lime green accent</p>
+
+<style>
+  .screen-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px; }
+  .screen-wrap { background: #0a0a0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; overflow: hidden; }
+  .screen-label { background: rgba(163,230,53,0.08); border-bottom: 1px solid rgba(163,230,53,0.15); padding: 6px 12px; font-size: 10px; font-weight: 700; letter-spacing: 2px; color: #a3e635; text-transform: uppercase; }
+  .screen-body { padding: 12px; }
+  .glass { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 10px; backdrop-filter: blur(10px); }
+  .glass-green { background: rgba(163,230,53,0.07); border: 1px solid rgba(163,230,53,0.2); border-radius: 10px; padding: 10px; }
+  .tag { display: inline-block; font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 4px; letter-spacing: 1px; }
+  .tag-lime { background: rgba(163,230,53,0.15); color: #a3e635; }
+  .tag-gray { background: rgba(255,255,255,0.06); color: #64748b; }
+  .tag-yellow { background: rgba(250,204,21,0.15); color: #facc15; }
+  .tag-red { background: rgba(239,68,68,0.15); color: #f87171; }
+  .mini-avatar { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg,#a3e635,#65a30d); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; color: #0f1117; flex-shrink:0; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .muted { color: #475569; font-size: 10px; }
+  .label-sm { color: #64748b; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 5px; }
+  .score-box { width: 28px; height: 28px; background: rgba(163,230,53,0.08); border: 1px solid rgba(163,230,53,0.3); border-radius: 6px; text-align: center; line-height: 28px; color: #a3e635; font-weight: 700; font-size: 13px; }
+</style>
+
+<div class="screen-grid">
+
+  <!-- HOME -->
+  <div class="screen-wrap">
+    <div class="screen-label">1 · Home — Rooms + Stats</div>
+    <div class="screen-body">
+      <!-- Stats bar -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:10px">
+        <div class="glass-green" style="text-align:center;padding:7px">
+          <div style="color:#a3e635;font-size:18px;font-weight:800;line-height:1">142</div>
+          <div class="muted">pts totales</div>
+        </div>
+        <div class="glass" style="text-align:center;padding:7px">
+          <div style="color:#f1f5f9;font-size:18px;font-weight:800;line-height:1">12</div>
+          <div class="muted">predicciones</div>
+        </div>
+        <div class="glass" style="text-align:center;padding:7px">
+          <div style="color:#facc15;font-size:18px;font-weight:800;line-height:1">🔥3</div>
+          <div class="muted">racha</div>
+        </div>
+      </div>
+      <!-- Rooms -->
+      <div class="label-sm">Mis Rooms</div>
+      <div class="glass-green" style="margin-bottom:6px">
+        <div class="row" style="justify-content:space-between">
+          <div>
+            <div style="color:#f1f5f9;font-size:11px;font-weight:600">🏆 Amigos 2026</div>
+            <div class="muted">8 miembros · 3 por predecir</div>
+          </div>
+          <div style="text-align:right">
+            <div style="color:#a3e635;font-size:13px;font-weight:700">#3</div>
+            <div class="muted">142 pts</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass" style="margin-bottom:6px">
+        <div class="row" style="justify-content:space-between">
+          <div>
+            <div style="color:#f1f5f9;font-size:11px;font-weight:600">💼 Trabajo FC</div>
+            <div class="muted">12 miembros · 1 por predecir</div>
+          </div>
+          <div style="text-align:right">
+            <div style="color:#94a3b8;font-size:13px;font-weight:700">#7</div>
+            <div class="muted">98 pts</div>
+          </div>
+        </div>
+      </div>
+      <div style="border:2px dashed rgba(163,230,53,0.25);border-radius:10px;padding:8px;text-align:center;color:#a3e635;font-size:10px;font-weight:600">+ Crear room &nbsp;·&nbsp; Unirse con código</div>
+    </div>
+  </div>
+
+  <!-- ROOM DETAIL -->
+  <div class="screen-wrap">
+    <div class="screen-label">2 · Room Detail — Tabs</div>
+    <div class="screen-body">
+      <div style="color:#f1f5f9;font-size:13px;font-weight:700;margin-bottom:2px">🏆 Amigos 2026</div>
+      <div class="muted" style="margin-bottom:8px">8 miembros · código: AB3X9K</div>
+      <!-- Tabs -->
+      <div style="display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:10px">
+        <div style="padding:5px 12px;font-size:10px;font-weight:700;color:#a3e635;border-bottom:2px solid #a3e635">Predicciones</div>
+        <div style="padding:5px 12px;font-size:10px;color:#475569">Leaderboard</div>
+        <div style="padding:5px 12px;font-size:10px;color:#475569">Miembros</div>
+      </div>
+      <!-- Match predictions list -->
+      <div class="glass-green" style="margin-bottom:6px">
+        <div class="row" style="justify-content:space-between;margin-bottom:4px">
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600">Argentina vs México</div>
+          <span class="tag tag-lime">✓ Predicho</span>
+        </div>
+        <div class="row" style="justify-content:space-between">
+          <div class="muted">Grupo A · hoy 18:00</div>
+          <div class="row" style="gap:4px">
+            <div class="score-box">2</div>
+            <div style="color:#475569;font-size:11px">-</div>
+            <div class="score-box">1</div>
+          </div>
+        </div>
+      </div>
+      <div class="glass" style="margin-bottom:6px">
+        <div class="row" style="justify-content:space-between;margin-bottom:4px">
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600">Brasil vs Serbia</div>
+          <span class="tag tag-yellow">⚡ Sin predecir</span>
+        </div>
+        <div class="muted">Grupo G · hoy 21:00</div>
+      </div>
+      <div class="glass">
+        <div class="row" style="justify-content:space-between;margin-bottom:4px">
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600">Francia vs Polonia</div>
+          <span class="tag tag-red">🔒 Cerrado</span>
+        </div>
+        <div class="muted">Grupo D · finalizado · 1-0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREDICTION FORM -->
+  <div class="screen-wrap">
+    <div class="screen-label">3 · Formulario de Predicción</div>
+    <div class="screen-body">
+      <div style="color:#f1f5f9;font-size:13px;font-weight:700;margin-bottom:2px">Brasil vs Serbia</div>
+      <div class="muted" style="margin-bottom:10px">Grupo G · 15 Jun 2026 · 21:00</div>
+      <!-- Score inputs -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:16px 0">
+        <div style="text-align:center">
+          <div style="color:#94a3b8;font-size:10px;margin-bottom:6px">Brasil</div>
+          <div style="width:56px;height:56px;background:rgba(163,230,53,0.08);border:2px solid rgba(163,230,53,0.4);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#a3e635;font-size:28px;font-weight:800">2</div>
+        </div>
+        <div style="color:#475569;font-size:20px;font-weight:300;margin-top:18px">vs</div>
+        <div style="text-align:center">
+          <div style="color:#94a3b8;font-size:10px;margin-bottom:6px">Serbia</div>
+          <div style="width:56px;height:56px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);border-radius:12px;display:flex;align-items:center;justify-content:center;color:#f1f5f9;font-size:28px;font-weight:800">0</div>
+        </div>
+      </div>
+      <!-- Early bonus badge -->
+      <div class="glass-green" style="margin-bottom:10px;display:flex;align-items:center;gap:8px">
+        <span style="font-size:14px">⚡</span>
+        <div>
+          <div style="color:#a3e635;font-size:10px;font-weight:700">Early bonus disponible</div>
+          <div class="muted">+1 pt por predecir con más de 24h de anticipación</div>
+        </div>
+      </div>
+      <div style="background:#a3e635;border-radius:8px;padding:10px;text-align:center;color:#0f1117;font-size:12px;font-weight:800">GUARDAR PREDICCIÓN</div>
+    </div>
+  </div>
+
+  <!-- LEADERBOARD TAB -->
+  <div class="screen-wrap">
+    <div class="screen-label">4 · Leaderboard (tab en Room)</div>
+    <div class="screen-body">
+      <!-- Tab activo: leaderboard -->
+      <div style="display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:10px">
+        <div style="padding:5px 12px;font-size:10px;color:#475569">Predicciones</div>
+        <div style="padding:5px 12px;font-size:10px;font-weight:700;color:#a3e635;border-bottom:2px solid #a3e635">Leaderboard</div>
+        <div style="padding:5px 12px;font-size:10px;color:#475569">Miembros</div>
+      </div>
+      <!-- Rankings -->
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <div class="glass-green">
+          <div class="row" style="justify-content:space-between">
+            <div class="row">
+              <div style="color:#a3e635;font-size:12px;font-weight:800;width:16px">#1</div>
+              <div class="mini-avatar">L</div>
+              <div>
+                <div style="color:#f1f5f9;font-size:11px;font-weight:600">Luis Merca</div>
+                <div class="muted">🔥 racha ×3</div>
+              </div>
+            </div>
+            <div style="text-align:right">
+              <div style="color:#a3e635;font-size:14px;font-weight:800">142</div>
+              <div class="muted">pts</div>
+            </div>
+          </div>
+        </div>
+        <div class="glass">
+          <div class="row" style="justify-content:space-between">
+            <div class="row">
+              <div style="color:#64748b;font-size:12px;font-weight:700;width:16px">#2</div>
+              <div class="mini-avatar" style="background:rgba(255,255,255,0.1);color:#94a3b8">F</div>
+              <div style="color:#94a3b8;font-size:11px">Fabrizzio</div>
+            </div>
+            <div style="color:#94a3b8;font-size:13px;font-weight:700">118</div>
+          </div>
+        </div>
+        <div class="glass">
+          <div class="row" style="justify-content:space-between">
+            <div class="row">
+              <div style="color:#64748b;font-size:12px;font-weight:700;width:16px">#3</div>
+              <div class="mini-avatar" style="background:rgba(255,255,255,0.1);color:#94a3b8">A</div>
+              <div style="color:#94a3b8;font-size:11px">Alfredo</div>
+            </div>
+            <div style="color:#94a3b8;font-size:13px;font-weight:700">95</div>
+          </div>
+        </div>
+        <!-- Breakdown hover hint -->
+        <div style="margin-top:6px;padding:6px 8px;background:rgba(255,255,255,0.03);border-radius:6px;display:flex;justify-content:space-between">
+          <span class="muted">base</span><span style="color:#64748b;font-size:10px">138</span>
+          <span class="muted">early</span><span style="color:#64748b;font-size:10px">2</span>
+          <span class="muted">racha</span><span style="color:#64748b;font-size:10px">2</span>
+          <span style="color:#a3e635;font-size:10px;font-weight:700">= 142</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MATCHES (public) -->
+  <div class="screen-wrap">
+    <div class="screen-label">5 · Partidos (filtros por estado/fase)</div>
+    <div class="screen-body">
+      <!-- Filters -->
+      <div style="display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap">
+        <div style="padding:4px 8px;background:rgba(163,230,53,0.15);border:1px solid rgba(163,230,53,0.3);border-radius:5px;font-size:9px;font-weight:700;color:#a3e635">Todos</div>
+        <div style="padding:4px 8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:5px;font-size:9px;color:#64748b">Programados</div>
+        <div style="padding:4px 8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:5px;font-size:9px;color:#64748b">En juego</div>
+        <div style="padding:4px 8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:5px;font-size:9px;color:#64748b">Finalizados</div>
+        <div style="padding:4px 8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:5px;font-size:9px;color:#64748b">Fase Grupos</div>
+        <div style="padding:4px 8px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:5px;font-size:9px;color:#64748b">Final</div>
+      </div>
+      <!-- Match list -->
+      <div class="glass" style="margin-bottom:6px">
+        <div class="row" style="justify-content:space-between">
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600;width:70px">Argentina</div>
+          <div class="row" style="gap:4px">
+            <div class="score-box">3</div>
+            <div style="color:#475569;font-size:10px">-</div>
+            <div class="score-box">0</div>
+          </div>
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600;width:70px;text-align:right">México</div>
+        </div>
+        <div class="row" style="justify-content:space-between;margin-top:4px">
+          <span class="tag tag-gray">GRUPO C</span>
+          <span class="tag tag-gray">FINALIZADO</span>
+        </div>
+      </div>
+      <div class="glass-green" style="margin-bottom:6px">
+        <div class="row" style="justify-content:space-between">
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600;width:70px">Brasil</div>
+          <div style="color:#facc15;font-size:9px;font-weight:700;padding:3px 8px;background:rgba(250,204,21,0.1);border-radius:4px">EN JUEGO</div>
+          <div style="color:#f1f5f9;font-size:11px;font-weight:600;width:70px;text-align:right">Serbia</div>
+        </div>
+        <div class="row" style="justify-content:space-between;margin-top:4px">
+          <span class="tag tag-gray">GRUPO G</span>
+          <span style="color:#94a3b8;font-size:9px">21:00</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADMIN MATCHES -->
+  <div class="screen-wrap">
+    <div class="screen-label">6 · Admin — Gestión de Partidos</div>
+    <div class="screen-body">
+      <div class="row" style="justify-content:space-between;margin-bottom:10px">
+        <div style="color:#f1f5f9;font-size:12px;font-weight:700">Partidos</div>
+        <div style="background:#a3e635;color:#0f1117;font-size:9px;font-weight:800;padding:5px 10px;border-radius:6px">+ Nuevo partido</div>
+      </div>
+      <!-- Table rows -->
+      <div style="font-size:9px;color:#475569;display:grid;grid-template-columns:2fr 1fr 1fr 60px;gap:6px;padding:0 4px;margin-bottom:5px;letter-spacing:1px;text-transform:uppercase">
+        <div>Partido</div><div>Fecha</div><div>Estado</div><div>Acción</div>
+      </div>
+      <div class="glass" style="margin-bottom:5px;display:grid;grid-template-columns:2fr 1fr 1fr 60px;gap:6px;align-items:center">
+        <div style="color:#f1f5f9;font-size:10px;font-weight:600">Argentina vs México</div>
+        <div class="muted">15 Jun</div>
+        <span class="tag tag-gray" style="width:fit-content">FINALIZADO</span>
+        <div style="color:#64748b;font-size:9px;cursor:pointer">✏️ editar</div>
+      </div>
+      <div class="glass-green" style="margin-bottom:5px;display:grid;grid-template-columns:2fr 1fr 1fr 60px;gap:6px;align-items:center">
+        <div style="color:#f1f5f9;font-size:10px;font-weight:600">Brasil vs Serbia</div>
+        <div class="muted">15 Jun</div>
+        <span class="tag tag-yellow" style="width:fit-content">EN JUEGO</span>
+        <div style="color:#a3e635;font-size:9px;font-weight:700;cursor:pointer">📥 resultado</div>
+      </div>
+      <div class="glass" style="display:grid;grid-template-columns:2fr 1fr 1fr 60px;gap:6px;align-items:center">
+        <div style="color:#f1f5f9;font-size:10px;font-weight:600">Francia vs Polonia</div>
+        <div class="muted">16 Jun</div>
+        <span class="tag tag-lime" style="width:fit-content">PROGR.</span>
+        <div style="color:#64748b;font-size:9px;cursor:pointer">✏️ editar</div>
+      </div>
+    </div>
+  </div>
+
+</div>

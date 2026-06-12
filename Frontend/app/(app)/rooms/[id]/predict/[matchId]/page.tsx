@@ -5,14 +5,14 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useMatch } from '@/hooks/useMatches'
-import { usePrediction, useCreatePrediction, useUpdatePrediction } from '@/hooks/usePredictions'
+import { usePrediction, useCreatePrediction, useUpdatePrediction, useDeletePrediction } from '@/hooks/usePredictions'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
-import { ArrowLeft, Zap } from 'lucide-react'
+import { ArrowLeft, Zap, Trash2 } from 'lucide-react'
 
 const schema = z.object({
   homeScore: z.number().int().min(0, 'Mínimo 0'),
@@ -28,13 +28,17 @@ export default function PredictPage() {
   const { data: existing } = usePrediction(roomId, matchId)
   const { mutateAsync: create, isPending: creating } = useCreatePrediction(roomId)
   const { mutateAsync: update, isPending: updating } = useUpdatePrediction(roomId, matchId)
+  const { mutateAsync: deletePrediction, isPending: deleting } = useDeletePrediction(roomId, matchId)
 
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<FormData>({ resolver: zodResolver(schema) })
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: { homeScore: 0, awayScore: 0 },
+  })
 
   useEffect(() => {
     if (existing) reset({ homeScore: existing.homeScore, awayScore: existing.awayScore })
@@ -145,6 +149,22 @@ export default function PredictPage() {
                 : 'Guardar predicción'}
             </Button>
           </form>
+
+          {existing && !isLocked && (
+            <Button
+              variant="ghost"
+              size="sm"
+              className="w-full text-destructive hover:text-destructive"
+              disabled={deleting}
+              onClick={async () => {
+                await deletePrediction()
+                router.push(`/rooms/${roomId}`)
+              }}
+            >
+              <Trash2 className="mr-2 h-3 w-3" />
+              {deleting ? 'Eliminando...' : 'Quitar predicción'}
+            </Button>
+          )}
         </CardContent>
       </Card>
     </div>

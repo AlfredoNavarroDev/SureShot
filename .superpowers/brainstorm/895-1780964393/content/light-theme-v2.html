@@ -1,0 +1,168 @@
+<h2>HOME · Light Theme v2</h2>
+<p class="subtitle">Lucide icons · "Crear sala" · texto negro en botón primario</p>
+
+<style>
+  .light-home {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    max-width: 680px;
+    margin: 20px auto;
+    min-height: 340px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  .l-sidebar {
+    width: 60px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px 0;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .l-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .l-icon svg { width: 18px; height: 18px; stroke: #9ca3af; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .l-icon.active { background: #dcfce7; }
+  .l-icon.active svg { stroke: #65a30d; }
+  .l-icon.logo { background: linear-gradient(135deg, #84cc16, #4d7c0f); }
+  .l-icon.logo svg { stroke: white; stroke-width: 2; }
+  .l-content { flex: 1; padding: 16px; }
+  .l-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .l-stat { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px 10px; text-align: center; }
+  .l-stat-val { font-size: 28px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .l-stat-lbl { color: #9ca3af; font-size: 11px; }
+  .l-section-lbl { color: #9ca3af; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
+  .l-room { border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between; }
+  .l-room.highlighted { background: #f0fdf4; border: 1px solid #86efac; }
+  .l-room.plain { background: #ffffff; border: 1px solid #e5e7eb; }
+  .l-room-left { display: flex; align-items: center; gap: 10px; }
+  .l-room-icon { width: 32px; height: 32px; border-radius: 8px; background: #f3f4f6; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .l-room-icon svg { width: 16px; height: 16px; stroke: #6b7280; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .l-room.highlighted .l-room-icon { background: #dcfce7; }
+  .l-room.highlighted .l-room-icon svg { stroke: #65a30d; }
+  .l-room-name { font-size: 14px; font-weight: 700; color: #111827; margin-bottom: 2px; }
+  .l-room-sub { font-size: 11px; color: #9ca3af; }
+  .l-room-rank { font-size: 15px; font-weight: 800; color: #6b7280; text-align: right; }
+  .l-room-pts { font-size: 11px; color: #9ca3af; text-align: right; }
+  .l-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+  .l-btn-primary {
+    background: #65a30d; color: #000000;
+    border: none; border-radius: 10px; padding: 13px;
+    font-size: 13px; font-weight: 700; text-align: center;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .l-btn-primary svg { width: 15px; height: 15px; stroke: #000000; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .l-btn-outline {
+    background: transparent; color: #65a30d;
+    border: 1.5px solid #86efac; border-radius: 10px; padding: 13px;
+    font-size: 13px; font-weight: 600; text-align: center;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .l-btn-outline svg { width: 15px; height: 15px; stroke: #65a30d; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+
+<div class="light-home">
+  <!-- Sidebar -->
+  <div class="l-sidebar">
+    <!-- Logo -->
+    <div class="l-icon logo">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 0 20M8.5 4.5l1.5 5 4 1 1.5-5M4.5 8.5l5 1.5M19.5 8.5l-5 1.5M15.5 19.5l-1.5-5-4-1-1.5 5"/></svg>
+    </div>
+    <!-- Home (active) -->
+    <div class="l-icon active">
+      <svg viewBox="0 0 24 24"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg>
+    </div>
+    <!-- Calendar -->
+    <div class="l-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+    </div>
+    <!-- User -->
+    <div class="l-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    </div>
+    <!-- Theme toggle (moon) -->
+    <div class="l-icon" style="margin-top:auto; background:#f3f4f6; border-radius:50%;">
+      <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="l-content">
+    <!-- Stats -->
+    <div class="l-stats">
+      <div class="l-stat">
+        <div class="l-stat-val" style="color:#65a30d;">142</div>
+        <div class="l-stat-lbl">pts totales</div>
+      </div>
+      <div class="l-stat">
+        <div class="l-stat-val" style="color:#111827;">12</div>
+        <div class="l-stat-lbl">predicciones</div>
+      </div>
+      <div class="l-stat">
+        <div class="l-stat-val" style="color:#d97706; font-size:22px; display:flex; align-items:center; justify-content:center; gap:4px;">
+          <!-- Flame icon -->
+          <svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:#d97706;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><path d="M12 2c0 6-6 8-6 14a6 6 0 0 0 12 0c0-6-6-8-6-14z"/><path d="M12 12c0 3-2 4-2 6a2 2 0 0 0 4 0c0-2-2-3-2-6z" fill="#d97706" stroke="none"/></svg>
+          3
+        </div>
+        <div class="l-stat-lbl">racha</div>
+      </div>
+    </div>
+
+    <!-- Rooms -->
+    <div class="l-section-lbl">Mis Salas</div>
+
+    <div class="l-room highlighted">
+      <div class="l-room-left">
+        <div class="l-room-icon">
+          <!-- Trophy icon -->
+          <svg viewBox="0 0 24 24"><path d="M6 9H3V4h3M18 9h3V4h-3M6 9a6 6 0 0 0 12 0M12 15v4M8 19h8"/></svg>
+        </div>
+        <div>
+          <div class="l-room-name">Amigos 2026</div>
+          <div class="l-room-sub">8 miembros · 3 sin predecir</div>
+        </div>
+      </div>
+      <div>
+        <div class="l-room-rank" style="color:#65a30d;">#3</div>
+        <div class="l-room-pts">142 pts</div>
+      </div>
+    </div>
+
+    <div class="l-room plain">
+      <div class="l-room-left">
+        <div class="l-room-icon">
+          <!-- Briefcase icon -->
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2M12 12v4M10 14h4"/></svg>
+        </div>
+        <div>
+          <div class="l-room-name">Trabajo FC</div>
+          <div class="l-room-sub">12 miembros · 1 sin predecir</div>
+        </div>
+      </div>
+      <div>
+        <div class="l-room-rank">#7</div>
+        <div class="l-room-pts">98 pts</div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="l-buttons">
+      <div class="l-btn-primary">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+        Crear sala
+      </div>
+      <div class="l-btn-outline">
+        <svg viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+        Unirse con código
+      </div>
+    </div>
+  </div>
+</div>
